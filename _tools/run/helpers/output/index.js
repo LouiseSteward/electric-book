@@ -159,7 +159,7 @@ async function app (argv) {
     await assembleApp()
 
     if (argv['app-build']) {
-      await cordova(['platform', 'add', argv['app-os']])
+      await cordova(['platform', 'add', argv['app-os'] + '@latest'])
       await cordova(['platform', 'prepare', argv['app-os']])
 
       // Build the app

@@ -81,6 +81,35 @@ USER gitpod
 # Let gitpod own the NPM cache dir
 RUN sudo chown -R 33333:33333 "$HOME/.npm"
 
+# Install Android app requirements
+# JDK 11 
+RUN sudo apt install default-jdk
+
+# GRADLE
+RUN curl -s "https://get.sdkman.io" | bash
+RUN sdk install gradle 8.4
+
+# ANDROID SDK
+# https://developer.android.com/studio/index.html#command-line-tools-only
+RUN mkdir "$HOME/android"
+RUN cd "$HOME/android"
+RUN wget https://dl.google.com/android/repository/commandlinetools-linux-10406996_latest.zip
+RUN unzip commandlinetools-linux-10406996_latest.zip
+RUN rm commandlinetools-linux-10406996_latest.zip
+
+RUN cd $HOME
+
+# PATHS
+RUN echo 'export ANDROID_HOME="$HOME/android/"' >> ~/.bashrc
+RUN echo 'export PATH=$PATH:$ANDROID_HOME/platform-tools/' >> ~/.bashrc
+RUN echo 'export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin/' >> ~/.bashrc
+RUN echo 'export PATH=$PATH:$ANDROID_HOME/build-tools' >> ~/.bashrc
+RUN echo 'export PATH=$PATH:$ANDROID_HOME/emulator/' >> ~/.bashrc
+RUN echo 'export JAVA_HOME="/usr/share/doc/default-jdk"' >> ~/.bashrc
+RUN echo 'export PATH=$JAVA_HOME/bin:$PATH' >> ~/.bashrc
+
+RUN bash -lc "source ~/.bashrc"
+
 # Set paths for Ruby gems
 RUN echo '# Define Ruby Gems path' >> ~/.bashrc
 RUN echo 'export GEM_HOME="$HOME/.rvm/gems/ruby-2.7.6"' >> ~/.bashrc
