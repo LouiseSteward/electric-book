@@ -83,7 +83,7 @@ RUN sudo chown -R 33333:33333 "$HOME/.npm"
 
 # Install Android app requirements
 # JDK 11 
-RUN sudo apt install default-jdk
+RUN yes | sudo apt install default-jdk
 
 # GRADLE
 RUN curl -s "https://get.sdkman.io" | bash
