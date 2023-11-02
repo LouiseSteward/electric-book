@@ -88,7 +88,7 @@ RUN yes | sudo apt install default-jdk
 # GRADLE
 SHELL ["/bin/bash", "-c"]
 # RUN curl -s "https://get.sdkman.io" | bash
-RUN source "~/.sdkman/bin/sdkman-init.sh"
+RUN source "$HOME/.sdkman/bin/sdkman-init.sh"
 RUN sdk install gradle 8.4
 
 # ANDROID SDK
