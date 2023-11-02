@@ -86,8 +86,8 @@ RUN sudo chown -R 33333:33333 "$HOME/.npm"
 RUN yes | sudo apt install default-jdk
 
 # SDKMAN
-RUN curl -fsSL "https://get.sdkman.io" | bash \
- && bash -c ". /home/gitpod/.sdkman/bin/sdkman-init.sh"
+RUN curl -fsSL "https://get.sdkman.io" | bash
+RUN bash -c "source /home/gitpod/.sdkman/bin/sdkman-init.sh"
 
 # GRADLE
 # SHELL ["/bin/bash", "-c"]
