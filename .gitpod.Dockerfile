@@ -85,11 +85,15 @@ RUN sudo chown -R 33333:33333 "$HOME/.npm"
 # JDK 11 
 RUN yes | sudo apt install default-jdk
 
+# SDKMAN
+RUN curl -fsSL "https://get.sdkman.io" | bash \
+ && bash -c ". /home/gitpod/.sdkman/bin/sdkman-init.sh"
+
 # GRADLE
-SHELL ["/bin/bash", "-c"]
+# SHELL ["/bin/bash", "-c"]
 # RUN curl -s "https://get.sdkman.io" | bash
-RUN source "$HOME/.sdkman/bin/sdkman-init.sh"
-RUN sdk install gradle 8.4
+# RUN source "$HOME/.sdkman/bin/sdkman-init.sh"
+RUN bash -c "sdk install gradle 8.4"
 
 # ANDROID SDK
 # https://developer.android.com/studio/index.html#command-line-tools-only
